@@ -1,7 +1,9 @@
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -43,6 +45,9 @@ public class Register_Form extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        ID_label = new javax.swing.JLabel();
+        Button_delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -136,29 +141,57 @@ public class Register_Form extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         jTable1.getAccessibleContext().setAccessibleParent(this);
 
+        jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        ID_label.setText("ID");
+
+        Button_delete.setText("Delete");
+        Button_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_deleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(288, 288, 288))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ID_label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(288, 288, 288))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(7, 7, 7)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(Button_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ID_label))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -166,7 +199,11 @@ public class Register_Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(Button_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
@@ -360,16 +397,149 @@ public class Register_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
+        //*********** on mouse click display the select row ************
         
-        
+        int selected_row =jTable1.getSelectedRow();
+          DefaultTableModel table = (DefaultTableModel)jTable1.getModel();
+          ID_label.setText(table.getValueAt(selected_row, 0 ).toString());
+          username.setText(table.getValueAt(selected_row, 1 ).toString());
+          password.setText(table.getValueAt(selected_row, 2 ).toString());
+          
        
+          
+          
+          
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //**************** Start function for update button ****************
+        
+        int i =jTable1.getSelectedRow();
+        DefaultTableModel table = (DefaultTableModel)jTable1.getModel();
+       // String upass = new String(password.getPassword());
+        if(i>0){
+            table.setValueAt(ID_label.getText(), i ,0);
+            table.setValueAt(username.getText(), i ,1);
+            table.setValueAt(password.getPassword(), i ,2);
+             
+        }
+        
+        
+           // ************************ Update data *******************************
+           try {
+               
+             PreparedStatement pst_update,pst_check;  
+             ResultSet rs;
+             
+             String id = ID_label.getText();
+             String uname = username.getText();
+             String upass = new String(password.getPassword());
+             
+             //**************  check before update dating *****************
+            String Check_query = "Select * from `sample` where `username` =? ";
+               pst_check = con.prepareStatement(Check_query);
+                 pst_check.setString(1, uname);
+                                 
+                 rs = pst_check.executeQuery();
+                 
+                 if(rs.next())
+                 {
+                 JOptionPane.showMessageDialog(null,"already Exist!!");
+                 }
+                 
+                           
+            // ********** end of check if data is already exist! *****************
+             
+                 else{
+             
+             
+              
+             
+             String query = "Update sample set username ='"+uname+"' , password='"+upass+"' where id='"+id+"' ";
+            //con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test", "root" ,"");
+             pst_update = con.prepareStatement(query) ;
+          
+               
+               // pst_update.setString(1, username.getText());
+                //pst_update.setString(2, password.getText());
+               
+            
+                
+                pst_update.execute();
+              JOptionPane.showMessageDialog(null,"Record Updated!");
+                 }
+               
+                
+                // *** show new add data in table *****
+                    showTableData();
+                //************************************
+            
+                  
+            
+        }
+    
+catch (Exception e) {
+    
+    //JOptionPane.showMessageDialog(null,"Not Updated!");
+        }
+
+               
+        
+          //**************** End function for update button ****************
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void Button_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_deleteActionPerformed
+       
+        //******* Delete data from table **************
+        
+        
+         //**************** Start function for Delete button ****************
+        
+        int i =jTable1.getSelectedRow();
+        DefaultTableModel table = (DefaultTableModel)jTable1.getModel();
+       // String upass = new String(password.getPassword());
+        if(i>0){
+            table.setValueAt(ID_label.getText(), i ,0);
+            table.setValueAt(username.getText(), i ,1);
+            table.setValueAt(password.getPassword(), i ,2);
+             
+        }
+        
+        
+           // ************************ Delete data *******************************
+           try {
+               
+             PreparedStatement pst_Delete;  
+       
+             
+             String id = ID_label.getText();
+               
+             String Delete_query = "Delete from sample where id='"+id+"'";
+             pst_Delete = con.prepareStatement(Delete_query);
+          
+             pst_Delete.executeUpdate();
+              
+             JOptionPane.showMessageDialog(null,"Record Deleted!");
+             // *** show new add data in table *****
+                     showTableData();
+                //************************************
+            
+             
+                 }
+ 
+catch ( SQLException | HeadlessException e) {
+    
+    //JOptionPane.showMessageDialog(null,"Not Updated!");
+        }
+        
+        
+        
+    }//GEN-LAST:event_Button_deleteActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -411,7 +581,10 @@ public class Register_Form extends javax.swing.JFrame {
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_delete;
+    private javax.swing.JLabel ID_label;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
