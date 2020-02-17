@@ -48,6 +48,7 @@ public class Register_Form extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         ID_label = new javax.swing.JLabel();
         Button_delete = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -157,6 +158,17 @@ public class Register_Form extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 102, 102));
+        jButton3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Log out");
+        jButton3.setBorder(null);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,7 +180,8 @@ public class Register_Form extends javax.swing.JFrame {
                         .addComponent(ID_label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(288, 288, 288))
+                        .addGap(142, 142, 142)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -182,15 +195,17 @@ public class Register_Form extends javax.swing.JFrame {
                                 .addGap(52, 52, 52)
                                 .addComponent(Button_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(24, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ID_label))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,29 +443,31 @@ public class Register_Form extends javax.swing.JFrame {
            // ************************ Update data *******************************
            try {
                
-             PreparedStatement pst_update,pst_check;  
+             PreparedStatement pst_update, pst_check;  
              ResultSet rs;
              
              String id = ID_label.getText();
              String uname = username.getText();
              String upass = new String(password.getPassword());
              
-             //**************  check before update dating *****************
-            String Check_query = "Select * from `sample` where `username` =? ";
-               pst_check = con.prepareStatement(Check_query);
-                 pst_check.setString(1, uname);
+ //======== **************  check before update dating *****************=======
+             
+             
+          //  String Check_query = "Select * from `sample` where `username` =? ";
+            //   pst_check = con.prepareStatement(Check_query);
+              //   pst_check.setString(1, uname);
                                  
-                 rs = pst_check.executeQuery();
+                // rs = pst_check.executeQuery();
                  
-                 if(rs.next())
-                 {
-                 JOptionPane.showMessageDialog(null,"already Exist!!");
-                 }
+               //  if(rs.next())
+                 //{
+                // JOptionPane.showMessageDialog(null,"already Exist!!");
+                // }
                  
                            
             // ********** end of check if data is already exist! *****************
              
-                 else{
+               //  else{
              
              
               
@@ -467,7 +484,7 @@ public class Register_Form extends javax.swing.JFrame {
                 
                 pst_update.execute();
               JOptionPane.showMessageDialog(null,"Record Updated!");
-                 }
+                // }
                
                 
                 // *** show new add data in table *****
@@ -536,6 +553,17 @@ catch ( SQLException | HeadlessException e) {
         
     }//GEN-LAST:event_Button_deleteActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        
+        Login login_form = new Login();
+                
+                login_form.setVisible(true);
+                Register_Form.this.setVisible(false);
+                
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -585,6 +613,7 @@ catch ( SQLException | HeadlessException e) {
     private javax.swing.JLabel ID_label;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
